@@ -1,10 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
 const PORT = 5000;
 const URL = process.env.MONGODB_URL;
 mongoose.connect(URL);
@@ -37,6 +45,7 @@ app
   //post one booking to DB
 
   .post(function (req, res) {
+    console.log(req.body);
     const newBooking = new Booking({
       date: req.body.date,
       time: req.body.time,
@@ -45,7 +54,6 @@ app
       requests: req.body.requests,
       contact: req.body.contact,
     });
-
     newBooking.save(function (err) {
       if (!err) {
         res.send("New booking Saved");
