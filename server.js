@@ -1,9 +1,9 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 //const bodyParser = require("body-parser");
 
-require("dotenv").config();
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
@@ -27,11 +27,11 @@ const bookingShcema = {
   contact: String,
 };
 
-const Booking = mongoose.model("Booking", bookingShcema);
+const Booking = mongoose.model('Booking', bookingShcema);
 
 // get all bookins from DB
 app
-  .route("/bookings")
+  .route('/bookings')
 
   .get(function (req, res) {
     Booking.find(function (err, foundBoking) {
@@ -57,7 +57,7 @@ app
 
     newBooking.save(function (err) {
       if (!err) {
-        res.json("Booking saved");
+        res.json('Booking saved');
       } else {
         res.json(err);
       }
@@ -67,14 +67,14 @@ app
 // work with one of bookings
 
 app
-  .route("/bookings/:id")
+  .route('/bookings/:id')
 
   .get(function (req, res) {
     Booking.findOne({ _id: req.params.id }, function (err, foundBooking) {
       if (foundBooking) {
         res.send(foundBooking);
       } else {
-        res.send("No Matching Booking");
+        res.send('No Matching Booking');
       }
     });
   })
@@ -85,7 +85,7 @@ app
       { $set: req.body },
       function (err) {
         if (!err) {
-          res.json("Updated successfully");
+          res.json('Updated successfully');
         } else {
           res.send(err);
         }
@@ -96,7 +96,7 @@ app
   .delete(function (req, res) {
     Booking.findByIdAndRemove(req.params.id, function (err) {
       if (!err) {
-        res.send("Deleted One Booking!");
+        res.json('Deleted One Booking!');
       } else {
         res.send(err);
       }
