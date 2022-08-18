@@ -19,7 +19,7 @@ const URL = process.env.MONGODB_URL;
 mongoose.connect(URL);
 
 const bookingShcema = {
-  date: Date,
+  date: String,
   time: String,
   amount: Number,
   name: String,
