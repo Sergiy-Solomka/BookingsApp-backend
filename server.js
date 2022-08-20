@@ -1,4 +1,3 @@
-const cool = require('cool-ascii-faces');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -26,7 +25,6 @@ const Booking = mongoose.model('Booking', bookingShcema);
 
 // get all bookins from DB
 app
-  .get('/cool', (req, res) => res.send(cool()))
   .route('/bookings')
 
   .get(function (req, res) {
