@@ -1,20 +1,15 @@
+const cool = require('cool-ascii-faces');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-//const bodyParser = require("body-parser");
 
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-/* app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-); */
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const URL = process.env.MONGODB_URL;
 mongoose.connect(URL);
 
@@ -31,6 +26,7 @@ const Booking = mongoose.model('Booking', bookingShcema);
 
 // get all bookins from DB
 app
+  .get('/cool', (req, res) => res.send(cool()))
   .route('/bookings')
 
   .get(function (req, res) {
